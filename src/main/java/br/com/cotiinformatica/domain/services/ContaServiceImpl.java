@@ -11,7 +11,9 @@ import br.com.cotiinformatica.domain.dtos.ContaRequestDto;
 import br.com.cotiinformatica.domain.dtos.ContaResponseDto;
 import br.com.cotiinformatica.domain.entities.Conta;
 import br.com.cotiinformatica.domain.interfaces.ContaService;
+import br.com.cotiinformatica.infrastructure.components.LogFinancasComponent;
 import br.com.cotiinformatica.infrastructure.components.RabbitMQProducerComponent;
+import br.com.cotiinformatica.infrastructure.components.LogFinancasComponent.Operacao;
 import br.com.cotiinformatica.infrastructure.repositories.ContaRepository;
 
 @Service
@@ -20,6 +22,7 @@ public class ContaServiceImpl implements ContaService {
 	@Autowired ContaRepository contaRepository;
 	@Autowired ModelMapper modelMapper;
 	@Autowired RabbitMQProducerComponent rabbitMQProducerComponent;
+	@Autowired LogFinancasComponent logFinancasComponent;
 	
 	@Override
 	public ContaResponseDto cadastrar(ContaRequestDto request) throws Exception {
@@ -29,6 +32,8 @@ public class ContaServiceImpl implements ContaService {
 		contaRepository.save(conta);
 		
 		rabbitMQProducerComponent.sendMessage(conta);
+		
+		logFinancasComponent.gravarLog(conta.toString(), Operacao.CRIACAO);
 		
 		return modelMapper.map(conta, ContaResponseDto.class);
 	}
@@ -44,6 +49,8 @@ public class ContaServiceImpl implements ContaService {
 		
 		contaRepository.save(conta);
 		
+		logFinancasComponent.gravarLog(conta.toString(), Operacao.ALTERACAO);
+		
 		return modelMapper.map(conta, ContaResponseDto.class);
 	}
 
@@ -55,6 +62,8 @@ public class ContaServiceImpl implements ContaService {
 				.orElseThrow(() -> new IllegalArgumentException("Conta não encontrada."));
 		
 		contaRepository.delete(conta);
+		
+		logFinancasComponent.gravarLog(conta.toString(), Operacao.EXCLUSAO);
 	
 		return modelMapper.map(conta, ContaResponseDto.class);
 	}

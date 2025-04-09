@@ -11,6 +11,8 @@ import br.com.cotiinformatica.domain.dtos.TipoRequestDto;
 import br.com.cotiinformatica.domain.dtos.TipoResponseDto;
 import br.com.cotiinformatica.domain.entities.Tipo;
 import br.com.cotiinformatica.domain.interfaces.TipoService;
+import br.com.cotiinformatica.infrastructure.components.LogFinancasComponent;
+import br.com.cotiinformatica.infrastructure.components.LogFinancasComponent.Operacao;
 import br.com.cotiinformatica.infrastructure.repositories.TipoRepository;
 
 @Service
@@ -20,6 +22,8 @@ public class TipoServiceImpl implements TipoService {
 	TipoRepository tipoRepository;
 	@Autowired
 	ModelMapper modelMapper;
+	@Autowired
+	LogFinancasComponent logFinancasComponent;
 
 	@Override
 	public TipoResponseDto cadastrar(TipoRequestDto request) throws Exception {
@@ -28,24 +32,32 @@ public class TipoServiceImpl implements TipoService {
 
 		tipoRepository.save(tipo);
 
+		logFinancasComponent.gravarLog(tipo.toString(), Operacao.CRIACAO);
+
 		return modelMapper.map(tipo, TipoResponseDto.class);
 	}
 
 	@Override
 	public TipoResponseDto atualizar(Integer id, TipoRequestDto request) throws Exception {
+
 		var tipo = tipoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Tipo não encontrado."));
 
 		modelMapper.map(request, tipo);
 
 		tipoRepository.save(tipo);
 
+		logFinancasComponent.gravarLog(tipo.toString(), Operacao.ALTERACAO);
+
 		return modelMapper.map(tipo, TipoResponseDto.class);
 	}
 
 	@Override
+
 	public TipoResponseDto excluir(Integer id) throws Exception {
 		var tipo = tipoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Tipo não encontrado."));
 
+		logFinancasComponent.gravarLog(tipo.toString(), Operacao.EXCLUSAO);
+		
 		tipoRepository.delete(tipo);
 
 		return modelMapper.map(tipo, TipoResponseDto.class);
@@ -53,6 +65,7 @@ public class TipoServiceImpl implements TipoService {
 
 	@Override
 	public List<TipoResponseDto> consultar() throws Exception {
+
 		var tipos = tipoRepository.findAll();
 
 		return tipos.stream().map(tipo -> modelMapper.map(tipo, TipoResponseDto.class)).collect(Collectors.toList());
@@ -64,7 +77,5 @@ public class TipoServiceImpl implements TipoService {
 		var tipo = tipoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Tipo não encontrado."));
 
 		return modelMapper.map(tipo, TipoResponseDto.class);
-
 	}
-
 }
