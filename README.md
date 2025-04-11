@@ -92,14 +92,6 @@ A API estará disponível em: `http://localhost:8083`
 
 ---
 
-## 🧪 Testes
-
-Este projeto inclui testes unitários com **JUnit 5**, localizados em `src/test/java`. Para executá-los:
-
-```bash
-./mvnw test
-```
-
 Os testes cobrem os principais fluxos de negócio e endpoints da aplicação.
 
 ---
