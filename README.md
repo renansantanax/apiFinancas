@@ -80,6 +80,8 @@ A API estará disponível em: `http://localhost:8083`
 | PUT    | `/tipos/alterar/{id}`     | Atualiza dados da tipo      |
 | DELETE | `/tipos/excluir/{id}`     | Remove um tipo              |
 
+-
+
 | Método | Rota                        | Ação                        |
 |--------|-----------------------------|-----------------------------|
 | GET    | `/contas/consultar`         | Lista todas as contas       |
