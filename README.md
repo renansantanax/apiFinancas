@@ -79,10 +79,10 @@ A API estará disponível em: `http://localhost:8083`
 
 | Método | Rota                      | Ação                        |
 |--------|---------------------------|-----------------------------|
-| GET    | `/tipos/consultar`        | Lista todas as tipos        |
+| GET    | `/tipos/consultar`        | Lista todos as tipos        |
 | GET    | `/tipos/obter/{id}`       | Busca tipo por ID           |
-| POST   | `/tipos/criar`            | Cria uma nova tipo          |
-| PUT    | `/tipos/alterar/{id}`     | Atualiza dados da tipo      |
+| POST   | `/tipos/criar`            | Cria um nova tipo           |
+| PUT    | `/tipos/alterar/{id}`     | Atualiza dados do tipo      |
 | DELETE | `/tipos/excluir/{id}`     | Remove um tipo              |
 
 
