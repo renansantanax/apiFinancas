@@ -1,6 +1,6 @@
 # 💰 API de Finanças – Spring Boot
 
-API REST desenvolvida com **Spring Boot** para gerenciamento de contas financeiras, oferecendo funcionalidades completas de **CRUD**, integração com serviços externos e arquitetura robusta baseada em boas práticas de engenharia de software. O projeto é inteiramente conteinerizado com Docker e inclui cobertura de testes automatizados com JUnit.
+API REST desenvolvida com **Spring Boot** para gerenciamento de contas financeiras, oferecendo funcionalidades completas de **CRUD**, integração com serviços externos e arquitetura robusta baseada em boas práticas de engenharia de software. O projeto é inteiramente conteinerizado com Docker.
 
 Este projeto integra:
 - **Banco de dados relacional (PostgreSQL)** para persistência principal
