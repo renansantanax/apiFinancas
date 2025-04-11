@@ -1,19 +1,5 @@
 services:
 
-  apifinancas:
-    build:
-      context: .               
-      dockerfile: Dockerfile  
-    container_name: apifinancas_app
-    restart: always
-    ports:
-      - "8083:8083"
-    depends_on:
-      - postgres
-      - mongodb
-      - rabbitmq
-      - mailhog  
-
   postgres:
     image: postgres:latest
     container_name: postgres_apifinancas
@@ -57,10 +43,13 @@ services:
     container_name: mailhog_apifinancas
     restart: always
     ports:
-      - "1025:1025"  
-      - "8025:8025"
+      - "1025:1025"   # Porta SMTP
+      - "8025:8025"   # Interface Web
 
 volumes:
   postgres_data:
   mongo_data:
   rabbitmq_data:
+
+
+

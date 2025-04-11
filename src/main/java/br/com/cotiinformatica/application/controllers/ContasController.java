@@ -41,7 +41,7 @@ public class ContasController {
 		return ResponseEntity.ok(contaService.excluir(id));
 	}
 
-	@GetMapping("consultar/{dataMin}/{dataMax}")
+	@GetMapping("consultar")
 	public ResponseEntity<List<ContaResponseDto>> consultar() throws Exception {
 		return ResponseEntity.ok(contaService.consultar());
 	}
