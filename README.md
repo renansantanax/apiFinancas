@@ -79,7 +79,6 @@ A API estará disponível em: `http://localhost:8083`
 | POST   | `/tipos/criar`            | Cria uma nova tipo          |
 | PUT    | `/tipos/alterar/{id}`     | Atualiza dados da tipo      |
 | DELETE | `/tipos/excluir/{id}`     | Remove um tipo              |
-|------------------------------------------------------------------|
 
 | Método | Rota                        | Ação                        |
 |--------|-----------------------------|-----------------------------|
@@ -88,7 +87,6 @@ A API estará disponível em: `http://localhost:8083`
 | POST   | `/contas/criar`             | Cria uma nova conta         |
 | PUT    | `/contas/alterar/{id}`      | Atualiza dados da conta     |
 | DELETE | `/contas/excluir/{id}`      | Remove uma conta            |
-|--------------------------------------------------------------------|
 
 ---
 
