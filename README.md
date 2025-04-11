@@ -1,6 +1,13 @@
 # 💰 API de Finanças – Spring Boot
 
-API REST desenvolvida com **Spring Boot** para gerenciamento de contas financeiras, permitindo operações como criação, consulta, atualização e exclusão de registros. O projeto é totalmente virtualizável via Docker e inclui cobertura de testes com JUnit.
+API REST desenvolvida com **Spring Boot** para gerenciamento de contas financeiras, oferecendo funcionalidades completas de **CRUD**, integração com serviços externos e arquitetura robusta baseada em boas práticas de engenharia de software. O projeto é inteiramente conteinerizado com Docker e inclui cobertura de testes automatizados com JUnit.
+
+Este projeto integra:
+- **Banco de dados relacional (PostgreSQL)** para persistência principal
+- **Banco de dados NoSQL (MongoDB)** para armazenamento de logs e eventos
+- **Mensageria com RabbitMQ** para processamento assíncrono via filas
+- **Envio de e-mails transacionais** via Mailhog (SMTP fake para testes)
+- **Arquitetura baseada em DDD (Domain-Driven Design)** para separação clara de responsabilidades
 
 ---
 
@@ -9,10 +16,14 @@ API REST desenvolvida com **Spring Boot** para gerenciamento de contas financeir
 - **Java 21**
 - **Spring Boot 3+**
 - **Spring Data JPA**
+- **Spring Mail**
+- **RabbitMQ**
+- **MongoDB**
 - **JUnit 5**
 - **Docker & Docker Compose**
 - **Maven**
-- **PostgreSQL** (configurável via `docker-compose.yml`)
+- **Mailhog (testes de e-mail)**
+- **PostgreSQL**
 
 ---
 
@@ -62,12 +73,6 @@ docker-compose up --build
 
 A API estará disponível em: `http://localhost:8083`
 
-### ▶️ Manualmente (Java + Maven)
-
-```bash
-./mvnw spring-boot:run
-```
-
 ---
 
 ## 📌 Endpoints Padrão
@@ -98,10 +103,12 @@ Os testes cobrem os principais fluxos de negócio e endpoints da aplicação.
 
 ## 🛠️ Utilidades
 
-- ✅ Validação com `@Valid`
-- ✅ Paginação e filtros
-- ✅ Testes unitários com JUnit
-- ✅ Virtualização com Dockerfile
+- ✅ Validação de dados com @Valid
+- ✅ Paginação e filtros dinâmicos
+- ✅ Log de operações persistido em MongoDB
+- ✅ Mensageria com RabbitMQ
+- ✅ Envio de e-mails com Mailhog
+- ✅ Integração com base DDD para escalabilidade e organização
 
 ---
 
